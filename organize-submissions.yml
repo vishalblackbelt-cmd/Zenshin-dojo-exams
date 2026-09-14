@@ -1,0 +1,65 @@
+name: Auto-Organize Exam Submissions
+
+on:
+  push:
+    paths:
+      - 'data/submissions/*.json'
+      - 'data/payments/*.json'
+  workflow_dispatch:
+
+jobs:
+  organize-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate JSON files
+        run: |
+          echo "🔍 Validating submission files..."
+          for file in data/submissions/*.json; do
+            if [ -f "$file" ]; then
+              if ! jq empty "$file" 2>/dev/null; then
+                echo "❌ Invalid JSON: $file"
+                exit 1
+              fi
+              echo "✓ Valid: $file"
+            fi
+          done
+
+      - name: Generate submission report
+        run: |
+          echo "# Exam Submissions Report" > data/SUBMISSIONS_LOG.md
+          echo "" >> data/SUBMISSIONS_LOG.md
+          echo "Generated: $(date)" >> data/SUBMISSIONS_LOG.md
+          echo "" >> data/SUBMISSIONS_LOG.md
+          echo "## Summary" >> data/SUBMISSIONS_LOG.md
+          echo "- Total Submissions: $(find data/submissions -name '*.json' -type f | wc -l)" >> data/SUBMISSIONS_LOG.md
+          echo "- Last Updated: $(date)" >> data/SUBMISSIONS_LOG.md
+          echo "" >> data/SUBMISSIONS_LOG.md
+          echo "## Recent Submissions" >> data/SUBMISSIONS_LOG.md
+          ls -lt data/submissions/*.json 2>/dev/null | head -10 | awk '{print "- " $NF}' >> data/SUBMISSIONS_LOG.md || echo "- No submissions yet" >> data/SUBMISSIONS_LOG.md
+
+      - name: Commit organization changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if [ -n "$(git status --porcelain)" ]; then
+            git add data/SUBMISSIONS_LOG.md
+            git commit -m "📊 Auto-organize exam submissions - $(date +'%Y-%m-%d %H:%M')"
+            git push
+          else
+            echo "ℹ️  No changes to commit"
+          fi
+
+      - name: Notify on Slack (Optional)
+        if: always()
+        run: |
+          echo "✅ Workflow completed"
+          echo "📁 Submissions organized in data/ folder"
