@@ -1,0 +1,22 @@
+# Sensitive Data - Do NOT commit
+data/payments/*.json
+*.utr
+*.screenshot
+*.payment
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Note: data/submissions/ and data/students/ are tracked
+# Only payment-related files and credentials are ignored
