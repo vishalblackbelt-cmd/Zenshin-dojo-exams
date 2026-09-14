@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Submissions Dashboard - TSKA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  color: #111827;
+}
+.header {
+  background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(196,30,58,0.2);
+}
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #C41E3A;
+  margin: 0.5rem 0;
+}
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-success {
+  background: #dcfce7;
+  color: #166534;
+}
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+.badge-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.table-responsive {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background: #f3f4f6;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: #6b7280;
+  border-bottom: 2px solid #e5e7eb;
+}
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+tr:hover {
+  background: #f9fafb;
+}
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-primary {
+  background: #C41E3A;
+  color: white;
+}
+.btn-primary:hover {
+  background: #8B0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(196,30,58,0.3);
+}
+.btn-secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+.btn-secondary:hover {
+  background: #d1d5db;
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal.show {
+  display: flex;
+}
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+.close-btn {
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #6b7280;
+}
+.close-btn:hover {
+  color: #111827;
+}
+.filter-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.filter-group select, .filter-group input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin-top: 1rem;
+}
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+}
+.empty-state svg {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  opacity: 0.5;
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr !important; }
+  .stat-value { font-size: 2rem; }
+  table { font-size: 0.875rem; }
+  th, td { padding: 0.75rem 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h1 class="text-3xl font-bold">ZENSHIN DOJO</h1>
+<p class="text-red-200 text-sm mt-1">Exam Submissions Dashboard</p>
+</div>
+<div class="text-right">
+<div class="text-3xl font-bold" id="totalCount">0</div>
+<div class="text-red-200 text-sm">Total Submissions</div>
+</div>
+</div>
+</div>
+</div>
+
+<main class="max-w-7xl mx-auto px-4 py-8">
+
+<!-- Statistics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="stat-card">
+<span class="iconify text-3xl text-C41E3A" data-icon="mdi:check-circle"></span>
+<div class="stat-value" id="statVerified">0</div>
+<div class="stat-label">Verified</div>
+</div>
+<div class="stat-card">
+<span class="iconify text-3xl" style="color: #f59e0b" data-icon="mdi:clock-outline"></span>
+<div class="stat-value" id="statPending">0</div>
+<div class="stat-label">Pending</div>
+</div>
+<div class="stat-card">
+<span class="iconify text-3xl" style="color: #ef4444" data-icon="mdi:alert-circle"></span>
+<div class="stat-value" id="statFailed">0</div>
+<div class="stat-label">Issues</div>
+</div>
+<div class="stat-card">
+<span class="iconify text-3xl" style="color: #10b981" data-icon="mdi:currency-inr"></span>
+<div class="stat-value" id="statRevenue">₹0</div>
+<div class="stat-label">Revenue</div>
+</div>
+</div>
+
+<!-- Charts -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<div class="card">
+<h3 class="text-lg font-bold mb-4">Status Distribution</h3>
+<div class="chart-container">
+<canvas id="statusChart"></canvas>
+</div>
+</div>
+<div class="card">
+<h3 class="text-lg font-bold mb-4">Belt Wise Applications</h3>
+<div class="chart-container">
+<canvas id="beltChart"></canvas>
+</div>
+</div>
+</div>
+
+<!-- Filters -->
+<div class="card mb-6">
+<h3 class="text-lg font-bold mb-4">Filter Submissions</h3>
+<div class="filter-group">
+<input type="text" id="filterName" placeholder="Search by name..." style="flex: 1; min-width: 200px;">
+<select id="filterBelt">
+<option value="">All Belts</option>
+<option value="Yellow (9th Kyū)">Yellow (9th Kyū)</option>
+<option value="Orange (8th Kyū)">Orange (8th Kyū)</option>
+<option value="Green (7th Kyū)">Green (7th Kyū)</option>
+<option value="Blue (6th Kyū)">Blue (6th Kyū)</option>
+<option value="Purple 1 (5th Kyū)">Purple 1 (5th Kyū)</option>
+<option value="Purple 2 (4th Kyū)">Purple 2 (4th Kyū)</option>
+<option value="Brown 3 (3rd Kyū)">Brown 3 (3rd Kyū)</option>
+<option value="Brown 2 (2nd Kyū)">Brown 2 (2nd Kyū)</option>
+<option value="Brown 1 (1st Kyū)">Brown 1 (1st Kyū)</option>
+</select>
+<select id="filterStatus">
+<option value="">All Status</option>
+<option value="pending">Pending</option>
+<option value="verified">Verified</option>
+<option value="failed">Issues</option>
+</select>
+<button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+<button class="btn btn-primary" onclick="exportCSV()">
+<span class="iconify" data-icon="mdi:download"></span>
+Export CSV
+</button>
+</div>
+</div>
+
+<!-- Submissions Table -->
+<div class="card">
+<h3 class="text-lg font-bold mb-4">Recent Submissions</h3>
+<div class="table-responsive">
+<table id="submissionsTable">
+<thead>
+<tr>
+<th>Ref ID</th>
+<th>Name</th>
+<th>Membership</th>
+<th>Belt</th>
+<th>Fee</th>
+<th>UTR</th>
+<th>Status</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="tableBody">
+<tr><td colspan="9" class="text-center text-gray-500 py-8">No submissions yet. Loading...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</main>
+
+<!-- Details Modal -->
+<div id="detailsModal" class="modal">
+<div class="modal-content">
+<span class="close-btn" onclick="closeModal()">&times;</span>
+<h2 class="text-2xl font-bold mb-4 text-C41E3A">Submission Details</h2>
+<div id="modalBody"></div>
+<div class="mt-6 flex gap-2">
+<button class="btn btn-primary flex-1" onclick="downloadJSON()">Download JSON</button>
+<button class="btn btn-secondary flex-1" onclick="closeModal()">Close</button>
+</div>
+</div>
+</div>
+
+<script>
+let allSubmissions = [];
+let currentSubmission = null;
+
+// Load submissions from localStorage
+function loadSubmissions() {
+  const stored = localStorage.getItem('examSubmissions');
+  if (stored) {
+    allSubmissions = JSON.parse(stored);
+    renderTable(allSubmissions);
+    updateStats();
+    initCharts();
+  } else {
+    document.getElementById('tableBody').innerHTML = '<tr><td colspan="9" class="text-center text-gray-500 py-8"><span class="iconify" data-icon="mdi:inbox-multiple"></span><p>No submissions found. Students need to fill and submit the form.</p></td></tr>';
+  }
+}
+
+// Render table
+function renderTable(submissions) {
+  const tbody = document.getElementById('tableBody');
+  if (submissions.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" class="text-center text-gray-500 py-8">No matching submissions found.</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = submissions.map(sub => `
+    <tr>
+      <td><span class="font-mono font-bold text-C41E3A">${sub.refId || 'N/A'}</span></td>
+      <td><strong>${sub.fullName || 'N/A'}</strong></td>
+      <td><code class="text-xs">${sub.membershipNo || 'N/A'}</code></td>
+      <td>${sub.examBelt || 'N/A'}</td>
+      <td><strong>₹${sub.examFee || '0'}</strong></td>
+      <td><code class="text-xs">${sub.utrNumber || 'N/A'}</code></td>
+      <td><span class="badge badge-${sub.status || 'pending'}">${(sub.status || 'pending').toUpperCase()}</span></td>
+      <td><small>${new Date(sub.timestamp).toLocaleDateString()}</small></td>
+      <td><button class="btn btn-secondary" onclick="viewDetails('${sub.refId}')"><span class="iconify" data-icon="mdi:eye"></span></button></td>
+    </tr>
+  `).join('');
+}
+
+// View details
+function viewDetails(refId) {
+  const sub = allSubmissions.find(s => s.refId === refId);
+  if (!sub) return;
+  
+  currentSubmission = sub;
+  const html = `
+    <div class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="font-bold text-gray-600">Ref ID:</label><p>${sub.refId || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Status:</label><p><span class="badge badge-${sub.status || 'pending'}">${(sub.status || 'pending').toUpperCase()}</span></p></div>
+        <div><label class="font-bold text-gray-600">Full Name:</label><p>${sub.fullName || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Membership No:</label><p>${sub.membershipNo || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">DOB:</label><p>${sub.dob || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Sex:</label><p>${sub.sex || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Phone:</label><p>${sub.phone || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Current Belt:</label><p>${sub.currentBelt || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Exam Belt:</label><p>${sub.examBelt || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Exam Fee:</label><p>₹${sub.examFee || '0'}</p></div>
+        <div><label class="font-bold text-gray-600">Exam Date:</label><p>${sub.examDate || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Exam Place:</label><p>${sub.examPlace || 'N/A'}</p></div>
+        <div><label class="font-bold text-gray-600">Attendance:</label><p>${sub.attendance || '—'}%</p></div>
+        <div><label class="font-bold text-gray-600">Recommendation:</label><p>${sub.recommendation || '—'}</p></div>
+        <div><label class="font-bold text-gray-600">Instructor:</label><p>${sub.instructorName || '—'}</p></div>
+        <div><label class="font-bold text-gray-600">Guardian:</label><p>${sub.fatherName || '—'}</p></div>
+        <div><label class="font-bold text-gray-600">UTR Number:</label><p><code>${sub.utrNumber || 'N/A'}</code></p></div>
+        <div class="col-span-2"><label class="font-bold text-gray-600">Submitted:</label><p>${new Date(sub.timestamp).toLocaleString()}</p></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('detailsModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('detailsModal').classList.remove('show');
+  currentSubmission = null;
+}
+
+// Update stats
+function updateStats() {
+  const verified = allSubmissions.filter(s => s.status === 'verified').length;
+  const pending = allSubmissions.filter(s => s.status === 'pending').length;
+  const failed = allSubmissions.filter(s => s.status === 'failed').length;
+  const revenue = allSubmissions.reduce((sum, s) => sum + (parseInt(s.examFee) || 0), 0);
+  
+  document.getElementById('totalCount').textContent = allSubmissions.length;
+  document.getElementById('statVerified').textContent = verified;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statFailed').textContent = failed;
+  document.getElementById('statRevenue').textContent = '₹' + revenue.toLocaleString('en-IN');
+}
+
+// Initialize charts
+function initCharts() {
+  const verified = allSubmissions.filter(s => s.status === 'verified').length;
+  const pending = allSubmissions.filter(s => s.status === 'pending').length;
+  const failed = allSubmissions.filter(s => s.status === 'failed').length;
+  
+  new Chart(document.getElementById('statusChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Verified', 'Pending', 'Issues'],
+      datasets: [{
+        data: [verified, pending, failed],
+        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+        borderColor: '#fff',
+        borderWidth: 2
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+  
+  const beltCounts = {};
+  allSubmissions.forEach(s => {
+    beltCounts[s.examBelt] = (beltCounts[s.examBelt] || 0) + 1;
+  });
+  
+  new Chart(document.getElementById('beltChart'), {
+    type: 'bar',
+    data: {
+      labels: Object.keys(beltCounts),
+      datasets: [{
+        label: 'Applications',
+        data: Object.values(beltCounts),
+        backgroundColor: '#C41E3A',
+        borderRadius: 8
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y' }
+  });
+}
+
+// Filter
+document.getElementById('filterName').addEventListener('input', applyFilters);
+document.getElementById('filterBelt').addEventListener('change', applyFilters);
+document.getElementById('filterStatus').addEventListener('change', applyFilters);
+
+function applyFilters() {
+  const name = document.getElementById('filterName').value.toLowerCase();
+  const belt = document.getElementById('filterBelt').value;
+  const status = document.getElementById('filterStatus').value;
+  
+  const filtered = allSubmissions.filter(s => 
+    (s.fullName && s.fullName.toLowerCase().includes(name)) &&
+    (!belt || s.examBelt === belt) &&
+    (!status || s.status === status)
+  );
+  
+  renderTable(filtered);
+}
+
+function resetFilters() {
+  document.getElementById('filterName').value = '';
+  document.getElementById('filterBelt').value = '';
+  document.getElementById('filterStatus').value = '';
+  renderTable(allSubmissions);
+}
+
+// Export CSV
+function exportCSV() {
+  if (allSubmissions.length === 0) {
+    alert('No submissions to export');
+    return;
+  }
+  
+  const headers = ['Ref ID', 'Full Name', 'Membership', 'DOB', 'Sex', 'Phone', 'Current Belt', 'Exam Belt', 'Fee', 'Exam Date', 'UTR', 'Status', 'Timestamp'];
+  const rows = allSubmissions.map(s => [
+    s.refId, s.fullName, s.membershipNo, s.dob, s.sex, s.phone,
+    s.currentBelt, s.examBelt, s.examFee, s.examDate, s.utrNumber, s.status, s.timestamp
+  ]);
+  
+  let csv = headers.join(',') + '\n';
+  rows.forEach(row => {
+    csv += row.map(cell => `"${(cell || '').toString().replace(/"/g, '""')}"`).join(',') + '\n';
+  });
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `exam-submissions-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+}
+
+function downloadJSON() {
+  if (!currentSubmission) return;
+  const json = JSON.stringify(currentSubmission, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${currentSubmission.refId}.json`;
+  a.click();
+}
+
+// Load on page load
+window.addEventListener('load', loadSubmissions);
+
+// Auto-refresh every 5 seconds
+setInterval(loadSubmissions, 5000);
+</script>
+
+</body>
+</html>
