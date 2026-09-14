@@ -1,0 +1,29 @@
+{
+  "submission": {
+    "id": "string (TSKA-EXM-YYYY-MMDD-####)",
+    "timestamp": "ISO 8601 datetime",
+    "studentInfo": {
+      "fullName": "string",
+      "membershipNo": "string",
+      "dob": "YYYY-MM-DD",
+      "sex": "Male|Female",
+      "phone": "string"
+    },
+    "examDetails": {
+      "currentBelt": "string",
+      "examBelt": "string",
+      "examFee": "number",
+      "examDate": "YYYY-MM-DD",
+      "examPlace": "string",
+      "attendance": "number (0-100)",
+      "recommendation": "Recommended|Highly Recommended|Not Yet Ready",
+      "instructorName": "string",
+      "fatherName": "string"
+    },
+    "payment": {
+      "utrNumber": "string",
+      "amount": "number",
+      "status": "pending|verified|failed"
+    }
+  }
+}
