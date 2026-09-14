@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Your Google Sheet - TSKA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+}
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.header h1 {
+  color: #C41E3A;
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.step {
+  border-left: 4px solid #C41E3A;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.step-number {
+  display: inline-block;
+  background: #C41E3A;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-weight: bold;
+  margin-left: -2.25rem;
+  margin-right: 0.75rem;
+}
+.step h3 {
+  color: #111827;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.step p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+.step code {
+  background: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: #C41E3A;
+  font-weight: bold;
+}
+.highlight {
+  background: #fef3c7;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+  margin-top: 1rem;
+}
+.highlight strong {
+  color: #92400e;
+}
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+}
+.btn-primary {
+  background: #C41E3A;
+  color: white;
+}
+.btn-primary:hover {
+  background: #8B0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(196,30,58,0.3);
+}
+.btn-secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+.btn-secondary:hover {
+  background: #d1d5db;
+}
+.tips {
+  background: #e0f2fe;
+  border-left: 4px solid #0ea5e9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+.tips h4 {
+  color: #0369a1;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.tips ul {
+  color: #0c4a6e;
+  font-size: 0.9rem;
+  padding-left: 1.5rem;
+}
+.tips li {
+  margin-bottom: 0.25rem;
+}
+@media (max-width: 640px) {
+  .container {
+    padding: 1.5rem;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  .button-group {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="header">
+<div class="iconify text-6xl text-C41E3A mb-4" data-icon="mdi:google-sheets" style="display: inline-block;"></div>
+<h1>Find Your Google Sheet</h1>
+<p style="color: #6b7280; font-size: 0.95rem;">Step-by-step guide to locate your TSKA exam submissions data</p>
+</div>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">1</div>
+<h3>Open Google Drive</h3>
+<p>Go to <code>https://drive.google.com</code> and sign in with your Gmail account.</p>
+</div>
+
+<div class="step">
+<div class="step-number">2</div>
+<h3>Search for the Apps Script Project</h3>
+<p>In the search bar, search for:</p>
+<p style="background: #f3f4f6; padding: 0.75rem; border-radius: 6px; margin-top: 0.5rem; overflow-x: auto;">
+<code style="font-size: 0.85rem; word-break: break-all;">AKfycbw1AFt6yDHq85ASqSm8DqiSp-wNFBAf6rOCnxkap_DZQ4ZctYy0vZU3oqG-ASwmPjYg</code>
+</p>
+<p style="font-size: 0.85rem; color: #6b7280; margin-top: 0.5rem;">This is your Apps Script ID</p>
+</div>
+
+<div class="step">
+<div class="step-number">3</div>
+<h3>Find the Linked Spreadsheet</h3>
+<p>Once you find the Apps Script project, look for a linked Google Sheet. The sheet name usually contains:</p>
+<ul style="margin-top: 0.5rem; margin-left: 1rem; color: #6b7280; font-size: 0.9rem;">
+<li>✓ "TSKA" or "Exam"</li>
+<li>✓ "Submissions" or "Responses"</li>
+<li>✓ "Zenshin" or "Karate"</li>
+</ul>
+</div>
+
+<div class="step">
+<div class="step-number">4</div>
+<h3>Open the Sheet</h3>
+<p>Right-click on the sheet and select <strong>Open</strong>, or simply click on it to view all your exam submissions data.</p>
+</div>
+
+</div>
+
+<div class="highlight">
+<strong>💡 Tip:</strong> The Google Sheet will have columns like:
+<br><code>Full Name | Membership | Belt | Exam Fee | UTR | Status | Timestamp</code>
+</div>
+
+<div class="tips">
+<h4>🔍 Can't Find It?</h4>
+<ul>
+<li>Check <strong>Shared with me</strong> section in Google Drive</li>
+<li>Search for recent files (it should appear in "Recent" section)</li>
+<li>Look in your <strong>My Drive</strong> for sheets containing "exam" or "TSKA"</li>
+<li>Check if it's in a specific folder you created</li>
+</ul>
+</div>
+
+<div class="button-group">
+<a href="https://drive.google.com" class="btn btn-primary" target="_blank">
+<span class="iconify" data-icon="mdi:open-in-new"></span>
+Open Google Drive
+</a>
+<a href="https://script.google.com/home" class="btn btn-secondary" target="_blank">
+<span class="iconify" data-icon="mdi:open-in-new"></span>
+Go to Apps Script
+</a>
+</div>
+
+<div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 1rem; border-radius: 8px; margin-top: 1.5rem;">
+<p style="color: #166534; font-size: 0.9rem;"><strong>✓ Already Found It?</strong></p>
+<p style="color: #16a34a; font-size: 0.85rem; margin-top: 0.5rem;">Great! Now you can:</p>
+<ul style="color: #16a34a; font-size: 0.85rem; margin-top: 0.5rem; margin-left: 1rem;">
+<li>View all exam submissions in one place</li>
+<li>Sort and filter the data</li>
+<li>Export data as CSV or PDF</li>
+<li>Create charts and reports</li>
+<li>Share with instructors or admins</li>
+</ul>
+</div>
+
+</div>
+
+</body>
+</html>
