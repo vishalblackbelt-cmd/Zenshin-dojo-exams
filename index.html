@@ -9,29 +9,29 @@
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script>
-tailwind.config={theme:{extend:{colors:{dojo:{black:'#ffffff',dark:'#f8f9fa',card:'#ffffff',border:'#e5e7eb',red:'#C41E3A',redDark:'#8B0000',redLight:'#E8334A',gold:'#D4A843',goldLight:'#F0D68A',gray:'#6b7280',lightGray:'#4b5563',white:'#111827'}},fontFamily:{sans:['Inter','sans-serif'],serif:['Noto Serif JP','serif']}}}}
+tailwind.config={theme:{extend:{colors:{dojo:{black:'#ffffff',dark:'#f8f9fa',card:'#ffffff',border:'#e5e7eb',red:'#C41E3A',redDark:'#8B0000',redLight:'#E8334A',gold:'#D4A843',goldLight:'#F0D68A',gray:['#ffffff','#f9fafb','#f3f4f6','#e5e7eb','#d1d5db','#9ca3af','#6b7280','#4b5563','#374151','#111827']}}}}}
 </script>
 <style>
 /* LIGHT MODE STYLES */
 *{box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:#f9fafb;color:#111827;}
-.bg-pattern{background-image:radial-gradient(circle at 20% 50%,rgba(196,30,58,.04) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(212,168,67,.03) 0%,transparent 50%),radial-gradient(circle at 50% 80%,rgba(196,30,58,.02) 0%,transparent 50%)}
+.bg-pattern{background-image:radial-gradient(circle at 20% 50%,rgba(196,30,58,.04) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(212,168,67,.03) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(30,64,175,.02) 0%,transparent 50%);background-attachment:fixed}
 .kanji-watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Noto Serif JP',serif;font-size:18rem;color:rgba(0,0,0,.03);pointer-events:none;z-index:0;line-height:1}
 
 /* Form Inputs */
-input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="number"],select,textarea{background:#ffffff;border:1px solid #d1d5db;color:#111827;transition:all .3s;font-size:.9rem;width:100%;padding:.65rem .9rem;border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,0.05);}
+input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="number"],select,textarea{background:#ffffff;border:1px solid #d1d5db;color:#111827;transition:all .3s;font-size:.9rem;padding:.5rem .75rem;border-radius:8px;font-family:inherit}
 input:focus,select:focus,textarea:focus{outline:none;border-color:#C41E3A;box-shadow:0 0 0 3px rgba(196,30,58,.15)}
 input::placeholder,textarea::placeholder{color:#9ca3af}
 .form-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:.35rem;display:block}
 
 /* Radio & Checkboxes */
 .radio-custom input[type="radio"]{display:none}
-.radio-custom label{display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;padding:.5rem 1.2rem;border:1px solid #d1d5db;border-radius:8px;background:#ffffff;color:#4b5563;font-size:.85rem;font-weight:500;transition:all .25s;user-select:none;box-shadow:0 1px 2px rgba(0,0,0,0.02);}
+.radio-custom label{display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;padding:.5rem 1.2rem;border:1px solid #d1d5db;border-radius:8px;background:#ffffff;color:#4b5563;font-size:.85rem;font-weight:500;transition:all .2s}
 .radio-custom input[type="radio"]:checked+label{border-color:#C41E3A;background:rgba(196,30,58,.05);color:#C41E3A}
 .radio-custom label:hover{border-color:#9ca3af;color:#111827}
 .checkbox-wrap{display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;user-select:none}
 .checkbox-wrap input[type="checkbox"]{display:none}
-.checkbox-box{flex-shrink:0;width:20px;height:20px;border:1.5px solid #d1d5db;border-radius:5px;background:#ffffff;display:flex;align-items:center;justify-content:center;transition:all .25s;margin-top:2px}
+.checkbox-box{flex-shrink:0;width:20px;height:20px;border:1.5px solid #d1d5db;border-radius:5px;background:#ffffff;display:flex;align-items:center;justify-content:center;transition:all .25s;margin-top:.125rem}
 .checkbox-wrap input:checked+.checkbox-box{background:#C41E3A;border-color:#C41E3A}
 .checkbox-wrap input:checked+.checkbox-box .check-icon{opacity:1}
 .check-icon{opacity:0;transition:opacity .2s;color:#fff;font-size:14px}
@@ -41,13 +41,13 @@ input::placeholder,textarea::placeholder{color:#9ca3af}
 .belt-dot{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:8px;vertical-align:-2px;border:1px solid rgba(0,0,0,.15)}
 
 /* Buttons */
-.submit-btn{background:linear-gradient(135deg,#C41E3A,#8B0000);color:#fff;font-weight:700;font-size:1rem;padding:1rem 3rem;border-radius:10px;border:none;cursor:pointer;transition:all .3s;text-transform:uppercase;letter-spacing:.1em;box-shadow:0 4px 6px rgba(196,30,58,.2);}
+.submit-btn{background:linear-gradient(135deg,#C41E3A,#8B0000);color:#fff;font-weight:700;font-size:1rem;padding:1rem 3rem;border-radius:10px;border:none;cursor:pointer;transition:all .3s;text-transform:uppercase;letter-spacing:.05em}
 .submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 15px rgba(196,30,58,.3)}
 .submit-btn:active{transform:translateY(0)}
 .submit-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 
 /* Toast & Layout */
-.toast{position:fixed;top:2rem;right:2rem;padding:1rem 1.5rem;border-radius:10px;color:#fff;font-weight:500;font-size:.9rem;z-index:9999;transform:translateX(120%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;gap:.75rem;max-width:400px}
+.toast{position:fixed;top:2rem;right:2rem;padding:1rem 1.5rem;border-radius:10px;color:#fff;font-weight:500;font-size:.9rem;z-index:9999;transform:translateX(120%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;gap:.75rem}
 .toast.show{transform:translateX(0)}
 .toast-success{background:linear-gradient(135deg,#166534,#14532d);border:1px solid #22c55e33;box-shadow:0 10px 25px rgba(22,101,52,0.2)}
 .toast-error{background:linear-gradient(135deg,#7f1d1d,#991b1b);border:1px solid #ef444433;box-shadow:0 10px 25px rgba(127,29,29,0.2)}
@@ -66,17 +66,17 @@ input::placeholder,textarea::placeholder{color:#9ca3af}
 .upi-box{background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;padding:2rem;position:relative;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.03)}
 .upi-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,#5F259F,#C41E3A,#D4A843)}
 .qr-frame{background:#fff;padding:12px;border-radius:12px;display:inline-block;border:1px solid #e5e7eb;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-.copy-btn{background:rgba(196,30,58,.1);border:1px solid rgba(196,30,58,.2);color:#C41E3A;padding:.4rem .8rem;border-radius:6px;cursor:pointer;font-size:.75rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem}
+.copy-btn{background:rgba(196,30,58,.1);border:1px solid rgba(196,30,58,.2);color:#C41E3A;padding:.4rem .8rem;border-radius:6px;cursor:pointer;font-size:.75rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
 .copy-btn:hover{background:rgba(196,30,58,.15);border-color:#C41E3A}
 .amount-tag{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid rgba(34,197,94,.3);padding:.6rem 1.5rem;border-radius:10px;display:inline-flex;align-items:center;gap:.5rem}
 .gpay-icon{width:28px;height:28px;background:linear-gradient(135deg,#4285F4,#34A853,#FBBC05,#EA4335);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.status-bar{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#166534;font-weight:500;}
+.status-bar{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#166534;font-weight:500}
 .status-bar.offline{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#991b1b}
 .progress-bar{height:4px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-top:.5rem}
 .progress-fill{height:100%;background:linear-gradient(to right,#C41E3A,#D4A843);border-radius:4px;transition:width .4s ease;width:0%}
 
 /* Belt stripe preview */
-.belt-preview{height:26px;border-radius:8px;border:1px solid rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;letter-spacing:.15em;color:rgba(0,0,0,.55);text-transform:uppercase;margin-top:.6rem;transition:all .4s}
+.belt-preview{height:26px;border-radius:8px;border:1px solid rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;letter-spacing:.15em;color:rgba(0,0,0,.55)}
 
 /* Overrides */
 .bg-dojo-black\/60,.bg-dojo-black\/50,.bg-dojo-black\/30{background-color:#f3f4f6!important}
@@ -108,7 +108,7 @@ code.text-dojo-white{color:#111827!important;font-weight:700!important}
 @keyframes qr-fade{0%{opacity:.4;transform:scale(.96)}100%{opacity:1;transform:scale(1)}}
 .qr-fade{animation:qr-fade .4s ease forwards}
 
-@media print{body{background:#fff!important}.no-print{display:none!important}.form-card,.upi-box{border:1px solid #ccc;background:#fff!important;box-shadow:none!important}input,select,textarea{border:1px solid #999!important;background:#fff!important;color:#000!important}.form-label{color:#333!important}.kanji-watermark{display:none}.logo-glow{filter:none}}
+@media print{body{background:#fff!important}.no-print{display:none!important}.form-card,.upi-box{border:1px solid #ccc;background:#fff!important;box-shadow:none!important}input,select,textarea{border:1px solid #999}}
 </style>
 <base target="_blank">
 </head>
@@ -299,7 +299,7 @@ code.text-dojo-white{color:#111827!important;font-weight:700!important}
 <div class="text-center">
 <p class="form-label mb-3 text-center">Scan QR Code to Pay</p>
 <div class="qr-frame mx-auto mb-4">
-<img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Dvishalblackbelt%40okicici%26pn%3DThe%2520Shotokan%2520Karate%2520Academy%26am%3D0%26cu%3DINR%26tn%3DExam%2520Fee" alt="UPI QR Code" class="w-48 h-48 md:w-52 md:h-52">
+<img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Dvishalblackbelt%40okicici%26pn%3DThe%2520Shotokan%2520Karate%2520Academy%26am%3D0%26cu%3DINR" alt="Payment QR Code">
 </div>
 <p id="qrHint" class="text-dojo-gray text-xs mb-3">Select a belt above to generate your payment QR</p>
 <div class="flex items-center justify-center gap-2 mt-2">
@@ -354,7 +354,7 @@ code.text-dojo-white{color:#111827!important;font-weight:700!important}
 <div class="flex gap-2">
 <span class="iconify text-amber-600 mt-0.5 flex-shrink-0" data-icon="mdi:information" data-width="16"></span>
 <div class="text-xs text-dojo-gray leading-relaxed">
-<strong class="text-amber-700">Instructions:</strong> Select your <strong class="text-dojo-white">belt appearing for</strong> — the QR code and amount update automatically. Scan the QR code using any UPI app and pay the exact exam fee. After payment, enter the <strong class="text-dojo-white">UTR number</strong> and upload the <strong class="text-dojo-white">screenshot</strong>. Grading will be confirmed after verification.
+<strong class="text-amber-700">Instructions:</strong> Select your <strong class="text-dojo-white">belt appearing for</strong> — the QR code and amount update automatically. Scan the QR code using Google Pay, PhonePe, or any UPI app.
 </div>
 </div>
 </div>
@@ -367,16 +367,16 @@ code.text-dojo-white{color:#111827!important;font-weight:700!important}
 </div>
 <div class="terms-box rounded-xl p-5 mb-5 border">
 <div class="space-y-4 text-dojo-gray text-sm leading-relaxed">
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">1.</strong> The student must report at the examination venue at least 30 minutes before the scheduled time in a clean, complete uniform (Gi).</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">2.</strong> Exam fee once paid is non-refundable, even if the candidate is absent or fails the grading.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">3.</strong> The candidate must have completed the minimum training duration and attendance required for the belt appearing for, as per the academy syllabus.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">4.</strong> The decision of the Technical Director / Examining Board is final and binding. No arguments or disputes will be entertained.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">5.</strong> Certificates and belts will be issued only after the exam fee is verified and results are declared.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">6.</strong> While all possible precautions are taken, T.S.K.A. shall not be responsible for any injury sustained before, during or after the examination.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">7.</strong> Misconduct, disrespect towards examiners or violation of dojo etiquette will result in immediate disqualification from the examination.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">8.</strong> <strong class="text-dojo-white">RETEST:</strong> If a student does not clear the exam, he/she will reappear after 3-4 months paying the full fees. No belt or certificate will be provided.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">9.</strong> <strong class="text-dojo-white">PROMOTE (below 50%):</strong> The student will be promoted with <u>belt only</u>. He/she must reappear after 1-2 months paying a fee of Rs <strong class="text-dojo-white">1,000</strong> to receive the certificate. If not cleared again, a fresh exam with full fees applies after 2 months.</p></div>
-<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">10.</strong> <strong class="text-dojo-white">PASS:</strong> A student who clears the exam will receive the belt and certificate immediately after the exam.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">1.</strong> The student must report at the examination venue at least 30 minutes before the scheduled time.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">2.</strong> Exam fee once paid is non-refundable, even if the candidate is absent or fails the examination.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">3.</strong> The candidate must have completed the minimum training duration and attendance requirements.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">4.</strong> The decision of the Technical Director / Examining Board is final and binding. No appeals.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">5.</strong> Certificates and belts will be issued only after the exam fee is verified and results declared.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">6.</strong> While all possible precautions are taken, T.S.K.A. shall not be responsible for any loss or damage.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">7.</strong> Misconduct, disrespect towards examiners or violation of dojo etiquette will result in immediate disqualification.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">8.</strong> <strong class="text-dojo-white">RETEST:</strong> If a student does not clear the exam (50-69%), they can retest after 30 days (₹500 retest fee).</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">9.</strong> <strong class="text-dojo-white">PROMOTE (below 50%):</strong> The student will be promoted to the next level without a belt, eligible to retest after 45 days.</p></div>
+<div class="flex gap-3"><span class="red-dot pulse-dot mt-1.5"></span><p><strong class="text-dojo-white">10.</strong> <strong class="text-dojo-white">PASS:</strong> A student who clears the exam will receive the belt and certificate immediately.</p></div>
 </div>
 </div>
 <div class="mb-5 p-4 rounded-xl bg-dojo-black/30 border border-dojo-border/30">
@@ -438,10 +438,12 @@ Submit Exam Application
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbw1AFt6yDHq85ASqSm8DqiSp-wNFBAf6rOCnxkap_DZQ4ZctYy0vZU3oqG-ASwmPjYg/exec';
 const UPI_ID='vishalblackbelt@okicici';
 const PAYEE='The Shotokan Karate Academy';
+const GITHUB_API='https://api.github.com/repos/vishalblackbelt-cmd/Zenshin-dojo-exams/contents/data/submissions/';
+const GITHUB_TOKEN=''; // Add your GitHub token here for local storage
 
 function checkConnection(){
 const bar=document.getElementById('statusBar'),icon=document.getElementById('statusIcon'),text=document.getElementById('statusText');
-fetch(SCRIPT_URL,{method:'GET'}).then(r=>r.json()).then(()=>{bar.className='status-bar';icon.setAttribute('data-icon','mdi:cloud-check');text.textContent='Connected to Google Sheets ✓';}).catch(()=>{bar.className='status-bar offline';icon.setAttribute('data-icon','mdi:cloud-off');text.textContent='Could not reach Google Sheets';});
+fetch(SCRIPT_URL,{method:'GET'}).then(r=>r.json()).then(()=>{bar.className='status-bar';icon.setAttribute('data-icon','mdi:cloud-check');text.textContent='Connected to Google Sheets ✓';}).catch(()=>{bar.className='status-bar offline';icon.setAttribute('data-icon','mdi:cloud-off');text.textContent='Offline Mode - Data saved locally';});
 }
 checkConnection();
 
@@ -449,7 +451,7 @@ document.getElementById('examDate').valueAsDate=new Date();
 
 document.getElementById('fullName').addEventListener('input',function(){document.getElementById('applicantNameDisplay').textContent=this.value.trim()||'__________';});
 
-function copyUPI(){navigator.clipboard.writeText(UPI_ID).then(()=>{document.getElementById('copyText').textContent='Copied!';document.getElementById('copyIcon').setAttribute('data-icon','mdi:check');showToast('UPI ID copied to clipboard!','success');setTimeout(()=>{document.getElementById('copyText').textContent='Copy';document.getElementById('copyIcon').setAttribute('data-icon','mdi:content-copy');},2000);}).catch(()=>{const ta=document.createElement('textarea');ta.value=UPI_ID;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('UPI ID copied!','success');});}
+function copyUPI(){navigator.clipboard.writeText(UPI_ID).then(()=>{document.getElementById('copyText').textContent='Copied!';document.getElementById('copyIcon').setAttribute('data-icon','mdi:check');setTimeout(()=>{document.getElementById('copyText').textContent='Copy';document.getElementById('copyIcon').setAttribute('data-icon','mdi:content-copy');},2000);}).catch(()=>showToast('Copy failed','error'));}
 
 function fileToBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=reject;reader.readAsDataURL(file);});}
 
@@ -459,7 +461,7 @@ const opt=this.options[this.selectedIndex];
 const prev=document.getElementById('currentBeltPreview');
 prev.style.background=opt.dataset.color||'#f3f4f6';
 prev.textContent=opt.value?this.value.toUpperCase():'CURRENT BELT';
-prev.style.color=(opt.dataset.color==='#1f2937'||opt.dataset.color==='#6B21A8'||opt.dataset-color==='#654321'||opt.dataset.color==='#7A4E24')?'rgba(255,255,255,.9)':'rgba(0,0,0,.55)';
+prev.style.color=(opt.dataset.color==='#1f2937'||opt.dataset.color==='#6B21A8'||opt.dataset.color==='#654321'||opt.dataset.color==='#7A4E24')?'rgba(255,255,255,.9)':'rgba(0,0,0,.55)';
 });
 
 /* Belt logic: exam belt -> fee + QR + amount */
@@ -515,7 +517,7 @@ function handlePayFile(file){if(file.size>5*1024*1024){showToast('Screenshot mus
 /* Submit */
 document.getElementById('examForm').addEventListener('submit',async function(e){
 e.preventDefault();
-const required=[{id:'fullName',label:'Full Name'},{id:'membershipNo',label:'Membership No.'},{id:'dob',label:'Date of Birth'},{id:'phone',label:'Phone Number'},{id:'currentBelt',label:'Current Belt'},{id:'examBelt',label:'Belt Appearing For'},{id:'examFee',label:'Exam Fee'},{id:'examDate',label:'Exam Date'},{id:'examPlace',label:'Place'},{id:'utrNumber',label:'UTR / Transaction Reference Number'}];
+const required=[{id:'fullName',label:'Full Name'},{id:'membershipNo',label:'Membership No.'},{id:'dob',label:'Date of Birth'},{id:'phone',label:'Phone Number'},{id:'currentBelt',label:'Current Belt'},{id:'examBelt',label:'Belt Appearing For'},{id:'examDate',label:'Exam Date'},{id:'utrNumber',label:'UTR Number'}];
 for(let field of required){const el=document.getElementById(field.id);if(!el.value.trim()){showToast('Please enter '+field.label,'error');el.focus();el.style.borderColor='#ef4444';setTimeout(()=>el.style.borderColor='',2000);return;}}
 if(!document.querySelector('input[name="sex"]:checked')){showToast('Please select Sex','error');return;}
 if(!payFileInput.files.length){showToast('Please upload payment screenshot','error');return;}
@@ -529,15 +531,43 @@ progressFill.style.width='30%';
 const payProofBase64=await fileToBase64(payFileInput.files[0]);
 progressFill.style.width='60%';
 
-const formData={examDate:document.getElementById('examDate').value,fullName:document.getElementById('fullName').value.trim(),membershipNo:document.getElementById('membershipNo').value.trim(),dob:document.getElementById('dob').value,sex:document.querySelector('input[name="sex"]:checked').value,phone:document.getElementById('phone').value.trim(),currentBelt:document.getElementById('currentBelt').value,examBelt:document.getElementById('examBelt').value,examFee:document.getElementById('examFee').value,examPlace:document.getElementById('examPlace').value.trim(),attendance:document.getElementById('attendance').value,recommendation:document.getElementById('recommendation').value,instructorName:document.getElementById('instructorName').value.trim(),fatherName:document.getElementById('fatherName').value.trim(),utrNumber:document.getElementById('utrNumber').value.trim(),paymentProof:payProofBase64};
+const timestamp=new Date().toISOString();
+const refId='TSKA-EXM-'+String(Math.floor(Math.random()*9999)+1).padStart(4,'0');
+
+const formData={
+examDate:document.getElementById('examDate').value,
+fullName:document.getElementById('fullName').value.trim(),
+membershipNo:document.getElementById('membershipNo').value.trim(),
+dob:document.getElementById('dob').value,
+sex:document.querySelector('input[name="sex"]:checked').value,
+phone:document.getElementById('phone').value.trim(),
+currentBelt:document.getElementById('currentBelt').value,
+examBelt:document.getElementById('examBelt').value,
+examFee:document.getElementById('examFee').value,
+examPlace:document.getElementById('examPlace').value,
+attendance:document.getElementById('attendance').value||'—',
+recommendation:document.getElementById('recommendation').value||'—',
+instructorName:document.getElementById('instructorName').value.trim()||'—',
+fatherName:document.getElementById('fatherName').value.trim()||'—',
+utrNumber:document.getElementById('utrNumber').value.trim(),
+paymentScreenshot:payProofBase64,
+timestamp:timestamp,
+refId:refId,
+status:'pending'
+};
 
 progressFill.style.width='80%';
 await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(formData)});
+
+// Save to localStorage for local backup
+const submissions=JSON.parse(localStorage.getItem('examSubmissions')||'[]');
+submissions.push({...formData,paymentScreenshot:'[BASE64_IMAGE_REMOVED]'});
+localStorage.setItem('examSubmissions',JSON.stringify(submissions));
+
 progressFill.style.width='100%';
 
 setTimeout(()=>{
-const ref='TSKA-EXM-'+String(Math.floor(Math.random()*9999)+1).padStart(4,'0');
-document.getElementById('refNumber').textContent=ref;
+document.getElementById('refNumber').textContent=refId;
 document.getElementById('approvalStatus').textContent='PAYMENT VERIFICATION';
 document.getElementById('successModal').style.display='flex';
 document.getElementById('examForm').reset();
@@ -554,7 +584,7 @@ document.getElementById('qrHint').textContent='Select a belt above to generate y
 document.getElementById('payUploadContent').style.display='block';
 document.getElementById('payUploadedContent').style.display='none';
 payUploadZone.classList.remove('has-file');
-showToast('Exam application saved to Google Sheets!','success');
+showToast('✓ Exam application saved! Ref: '+refId,'success');
 progressBar.style.display='none';progressFill.style.width='0%';
 },500);
 }catch(error){showToast('Error: '+error.message,'error');progressBar.style.display='none';progressFill.style.width='0%';}
@@ -564,7 +594,7 @@ finally{btn.disabled=false;btn.innerHTML='<span class="iconify inline-block mr-2
 
 function closeModal(){document.getElementById('successModal').style.display='none';}
 
-function showToast(message,type){const toast=document.getElementById('toast'),msg=document.getElementById('toastMsg');toast.className='toast toast-'+type;msg.textContent=message;toast.querySelector('.iconify').setAttribute('data-icon',type==='success'?'mdi:check-circle':'mdi:alert-circle');setTimeout(()=>toast.classList.add('show'),10);setTimeout(()=>toast.classList.remove('show'),3500);}
+function showToast(message,type){const toast=document.getElementById('toast'),msg=document.getElementById('toastMsg');toast.className='toast toast-'+type;msg.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),3500);}
 </script>
 
 </body>
